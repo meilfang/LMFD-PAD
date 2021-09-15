@@ -4,7 +4,7 @@
 This is the official repository of the paper: LMFD-PAD: Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection. The paper can be found in [here](link).
 
 ## Pipeline Overview
-![overview](images/workflow.png)
+![overview](images/workflow.png){width=75%}
 
 ## Data preparation
 Since the data in all used PAD datasets in our work are videos, we sample 10 frames in the average time interval of each video. In addition, the ratio of bona fide and attack is balanced by simple duplication. Finally, CSV files are generated for further training and evaluation. The format of the dataset CSV file is:
@@ -40,4 +40,9 @@ The training code for inter-dataset and cross-dataset experiments is same, the d
 
 ## Results
 The results of cross-dataset evaluation under different experimental settings on four face PAD datasets. More details can be found in paper.
-![cross_db](images/cross_db_results.png)
+![cross_db](images/cross_db_results.png){width=80%}
+
+## Models
+Four models pre-trained based on four cross-dataset experimental settings can be download via [google driver](https://drive.google.com/drive/folders/1qRBLkrn461r-E_Px3d_wialW-0soXEGn?usp=sharing).
+
+if you use LMFD-HAM architecture in this repository, please cite the following paper:
