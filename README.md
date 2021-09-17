@@ -1,7 +1,7 @@
 # LMFD-PAD
 ---
 ## Note
-This is the official repository of the paper: LMFD-PAD: Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection. The paper can be found in [here](link).
+This is the official repository of the paper: LMFD-PAD: Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection. The paper can be found in [here](https://arxiv.org/abs/2109.07950).
 
 ## Pipeline Overview
 ![overview](images/workflow.png)
@@ -16,10 +16,10 @@ image_path,label
 /image_dir/image_file_4.png, attack
 ```
 ## Training
-The training code for inter-dataset and cross-dataset experiments is same, the difference code between inter_db_main.py and cross_db_main.py is evaluation metrics.
-1. Example of inter-dataset training and testing:
+The training code for intra-dataset and cross-dataset experiments is same, the difference code between intra_db_main.py and cross_db_main.py is evaluation metrics.
+1. Example of intra-dataset training and testing:
     ```
-    python inter_db_main.py \
+    python intra_db_main.py \
       --protocol_dir 'dir_containing_csv_files' \
       --backbone resnet50 \
       --pretrain True \
@@ -46,3 +46,13 @@ The results of cross-dataset evaluation under different experimental settings on
 Four models pre-trained based on four cross-dataset experimental settings can be download via [google driver](https://drive.google.com/drive/folders/1qRBLkrn461r-E_Px3d_wialW-0soXEGn?usp=sharing).
 
 if you use LMFD-HAM architecture in this repository, please cite the following paper:
+```
+@misc{fang2021learnable,
+    title={Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection},
+    author={Meiling Fang and Naser Damer and Florian Kirchbuchner and Arjan Kuijper},
+    year={2021},
+    eprint={2109.07950},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+```
