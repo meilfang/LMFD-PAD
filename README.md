@@ -56,6 +56,5 @@ if you use LMFD-HAM architecture in this repository, please cite the following p
     primaryClass={cs.CV}
 }
 ```
-
 ##License
 This project is licensed under the terms of the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) license. Copyright (c) 2020 Fraunhofer Institute for Computer Graphics Research IGD Darmstadt.
