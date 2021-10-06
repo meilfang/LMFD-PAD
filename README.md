@@ -46,15 +46,15 @@ The results of cross-dataset evaluation under different experimental settings on
 Four models pre-trained based on four cross-dataset experimental settings can be download via [google driver](https://drive.google.com/drive/folders/1qRBLkrn461r-E_Px3d_wialW-0soXEGn?usp=sharing).
 
 if you use LMFD-HAM architecture in this repository, please cite the following paper:
-```
-@misc{fang2021learnable,
-    title={Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection},
-    author={Meiling Fang and Naser Damer and Florian Kirchbuchner and Arjan Kuijper},
-    year={2021},
-    eprint={2109.07950},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
-```
+    ```
+    @misc{fang2021learnable,
+        title={Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection},
+        author={Meiling Fang and Naser Damer and Florian Kirchbuchner and Arjan Kuijper},
+        year={2021},
+        eprint={2109.07950},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }
+    ```
 ##License
 This project is licensed under the terms of the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) license. Copyright (c) 2020 Fraunhofer Institute for Computer Graphics Research IGD Darmstadt.
