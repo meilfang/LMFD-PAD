@@ -3,10 +3,6 @@ from torch import nn
 from torchvision.models.resnet import ResNet, Bottleneck
 
 import numpy as np
-import torch.nn.init as init
-import numpy as np
-import types
-import torch.nn.functional as F
 
 from .attention import ChannelGate, SpatialGate
 
@@ -17,6 +13,7 @@ model_urls = {
     'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
     'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
 }
+
 
 # network architecture based on FAD and different attention modules
 class FAD_HAM_Net(nn.Module):
@@ -62,37 +59,42 @@ class FAD_HAM_Net(nn.Module):
         fad, fad_3, fad_2, fad_1 = self.FAD_encoder(fad)
         rgb, rgb_3, rgb_2, rgb_1 = self.RGB_encoder(x0)
 
-        concate_3 = torch.cat((fad_3, rgb_3), dim=1)
-        concate_2 = torch.cat((fad_2, rgb_2), dim=1)
-        concate_1 = torch.cat((fad_1, rgb_1), dim=1)
-        # high-level feature map using channel attention
-        att_x_3 = self.channel_attention(concate_3) # 14x14, 3
-        att_x_3_14x14 = self.downsample(att_x_3)
+        # # I commented these lines because It seems that map_x used for training
+        # # Uncomment these line if you are going to train the model
+        # concate_3 = torch.cat((fad_3, rgb_3), dim=1)
+        # concate_2 = torch.cat((fad_2, rgb_2), dim=1)
+        # concate_1 = torch.cat((fad_1, rgb_1), dim=1)
+        # # high-level feature map using channel attention
+        # att_x_3 = self.channel_attention(concate_3) # 14x14, 3
+        # att_x_3_14x14 = self.downsample(att_x_3)
+        #
+        # # low-level feature map using spatial attention
+        # att_x_2 = self.spa_1(concate_2) # 28x28, 5
+        # att_x_2_14x14 = self.downsample(att_x_2)
+        #
+        # att_x_1 = self.spa_2(concate_1) # 56x56, 7
+        # att_x_1_14x14 = self.downsample(att_x_1)
+        #
+        # x_concate = torch.cat((att_x_1_14x14, att_x_2_14x14, att_x_3_14x14), dim=1)
+        #
+        # map_x = self.lastconv1(x_concate)
+        # map_x = map_x.squeeze(1)
 
-        # low-level feature map using spatial attention
-        att_x_2 = self.spa_1(concate_2) # 28x28, 5
-        att_x_2_14x14 = self.downsample(att_x_2)
-
-        att_x_1 = self.spa_2(concate_1) # 56x56, 7
-        att_x_1_14x14 = self.downsample(att_x_1)
-
-        x_concate = torch.cat((att_x_1_14x14, att_x_2_14x14, att_x_3_14x14), dim=1)
-
-        map_x = self.lastconv1(x_concate)
-        map_x = map_x.squeeze(1)
-
-        x = torch.cat((fad, rgb), dim=1) # concatenate last output feature
+        x = torch.cat((fad, rgb), dim=1)  # concatenate last output feature
         x = self.linear1(x)
         x = self.bn(x)
         x = self.drop(x)
         x = self.cls(x)
-        return x, map_x
+        x = torch.sigmoid(x)
+        return x
 
 
 '''
 FAD_Head and Filter is based on paper: Thinking in frequency: Face forgery detection by mining frequency-aware clues
 The corresponding code is based on an unofficial implementation: https://github.com/yyk-wew/F3Net
 '''
+
+
 class FAD_Head(nn.Module):
     def __init__(self, size):
         super(FAD_Head, self).__init__()
@@ -123,6 +125,7 @@ class FAD_Head(nn.Module):
         out = torch.cat(y_list, dim=1)    # [N, 12, 224, 224]
         return out
 
+
 # Filter Module
 class Filter(nn.Module):
     def __init__(self, size, band_start, band_end, use_learnable=True, norm=False):
@@ -152,15 +155,19 @@ class Filter(nn.Module):
             y = x * filt
         return y
 
+
 def DCT_mat(size):
     m = [[ (np.sqrt(1./size) if i == 0 else np.sqrt(2./size)) * np.cos((j + 0.5) * np.pi * i / size) for j in range(size)] for i in range(size)]
     return m
 
+
 def generate_filter(start, end, size):
     return [[0. if i + j > end or i + j <= start else 1. for j in range(size)] for i in range(size)]
 
+
 def norm_sigma(x):
     return 2. * torch.sigmoid(x) - 1.
+
 
 # ResNet is used as backbone
 class ResNetEncoder(ResNet):
@@ -209,6 +216,7 @@ class ResNetEncoder(ResNet):
 
         return x, x3, x2, x1
 
+
 class BasicConv(nn.Module):
     def __init__(self, in_planes, out_planes, kernel_size, stride=1, padding=0, dilation=1, groups=1, relu=False, bn=False, bias=False):
         super(BasicConv, self).__init__()
@@ -225,6 +233,7 @@ class BasicConv(nn.Module):
             x = self.relu(x)
         return x
 
+
 def load_matched_state_dict(model, state_dict, print_stats=True):
     """
     Only loads weights that matched in key and shape. Ignore other weights.
@@ -239,6 +248,7 @@ def load_matched_state_dict(model, state_dict, print_stats=True):
     model.load_state_dict(curr_state_dict)
     if print_stats:
         print(f'Loaded state_dict: {num_matched}/{num_total} matched')
+
 
 def _test():
     import torch

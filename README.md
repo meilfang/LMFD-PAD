@@ -38,6 +38,18 @@ The training code for intra-dataset and cross-dataset experiments is same, the d
       --prefix 'custom_note' \
     ```
 
+## Inference
+Please refer to `inference_pytorch.py`
+```shell
+python inference_pytorch.py --checkpoint path-to-checkpoint --device cpu --input-dirs cropped
+```
+
+## Convert to ONNX
+Please refer to `pytorch2onnx.py`
+```shell
+python pytorch2onnx.py --checkpoint path-to-checkpoint --output lmfd_pad.onnx
+```
+
 ## Results
 The results of cross-dataset evaluation under different experimental settings on four face PAD datasets. More details can be found in paper.
 ![cross_db](images/cross_db_results.png)
