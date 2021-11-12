@@ -85,7 +85,7 @@ class FAD_HAM_Net(nn.Module):
         x = self.bn(x)
         x = self.drop(x)
         x = self.cls(x)
-        x = torch.sigmoid(x)
+        x = torch.sigmoid(x)  # Comment this line and add map_x to return if you want to train and evaluate the model
         return x
 
 
