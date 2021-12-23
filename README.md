@@ -44,6 +44,8 @@ The results of cross-dataset evaluation under different experimental settings on
 
 ## Models
 Four models pre-trained based on four cross-dataset experimental settings can be download via [google driver](https://drive.google.com/drive/folders/1qRBLkrn461r-E_Px3d_wialW-0soXEGn?usp=sharing).
+Please using the following threshold for testing those pre-trained weights. The thresholds of icm_o, ocm_i, omi_c, and oci_m models are 0.7309441, 0.6971898, 0.613508, and 0.53312653, respectively.
+More information and small test can be found in test.py. Please make sure give the correct model path.
 
 if you use LMFD-HAM architecture in this repository, please cite the following paper:
 ```
