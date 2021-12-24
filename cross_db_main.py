@@ -140,6 +140,7 @@ def main():
                     optimizer.zero_grad()
 
                     pred, _ = model(images)
+                    pred = torch.sigmoid(pred)
 
                     for j in range(images.shape[0]):
                         predictions.append(pred[j].detach().cpu())
