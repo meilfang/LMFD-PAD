@@ -1,7 +1,7 @@
 # LMFD-PAD
 ---
 ## Note
-This is the official repository of the paper: LMFD-PAD: Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection. The paper can be found in [here](https://arxiv.org/abs/2109.07950).
+This is the official repository of the accepted at WACV 2022: LMFD-PAD: Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection. The paper can be found in [here](https://arxiv.org/abs/2109.07950).
 
 ## Pipeline Overview
 ![overview](images/workflow.png)
@@ -49,13 +49,17 @@ More information and small test can be found in test.py. Please make sure give t
 
 if you use LMFD-HAM architecture in this repository, please cite the following paper:
 ```
-@misc{fang2021learnable,
-    title={Learnable Multi-level Frequency Decomposition and Hierarchical Attention Mechanism for Generalized Face Presentation Attack Detection},
-    author={Meiling Fang and Naser Damer and Florian Kirchbuchner and Arjan Kuijper},
-    year={2021},
-    eprint={2109.07950},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@inproceedings{DBLP:conf/wacv/FangDKK22,
+  author    = {Meiling Fang and
+               Naser Damer and
+               Florian Kirchbuchner and
+               Arjan Kuijper},
+  title     = {Learnable Multi-level Frequency Decomposition and Hierarchical Attention
+               Mechanism for Generalized Face Presentation Attack Detection},
+  booktitle = {{WACV}},
+  pages     = {1131--1140},
+  publisher = {{IEEE}},
+  year      = {2022}
 }
 ```
 
